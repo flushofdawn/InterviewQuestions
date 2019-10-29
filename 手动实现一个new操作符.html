@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>手动实现一个new操作符</title>
 </head>
 <body>
-$END$
+    <script>
+        /*手写一个new操作符*/
+        /*第一步,创建一个空对象*/
+        /*第二步,链接到原型,判断__proto__是否存在,存在传入__proto__,将这个对象的原型链指向自身*/
+        /*第三步,绑定this值,使 this 指向新创建的对象*/
+        /*第四步,返回新对象,如果函数没有返回对象类型 Object(包含 Functoin,Array,Date,RegExg,Error)，那么 new表达式中的函数调用将返回该对象引用。*/
+
+        let a = {age: 1};
+
+        function Bar(name) {
+            console.log( arguments );
+
+            this.age = name;
+        }
+        let b = new Bar(3);
+
+        console.log(b.age) // 1
+
+        let c =  _new( Bar , 5 );
+
+        console.log( c ) // 1
+
+        function _new(){
+
+            var newObj = {  };
+
+            console.log(  arguments  )
+
+            var Constructor = Array.prototype.shift.call( arguments );
+
+            console.log( Constructor );
+
+            newObj.__proto__ = Constructor.prototype;
+
+            console.log( Constructor.prototype )
+
+            var res = Constructor.apply( newObj, arguments );
+
+            console.log( res )
+            console.log( newObj )
+
+            return typeof res === "object" ? res : newObj;
+
+        }
+
+
+
+
+
+    </script>
 </body>
 </html>
