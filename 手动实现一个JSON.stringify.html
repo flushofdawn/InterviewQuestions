@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手动实现一个JSON.stringify</title>
+</head>
+<body>
+    <script>
+        /*
+         Boolean|Number|String 类型会自动转换成对应的原始值。
+         undefined、任意函数以及 symbol，会被忽略（出现在非数组对象的属性值中时），或者被转换成 null（出现在数组中时）。
+         不可枚举的属性会被忽略
+         如果一个对象的属性值通过某种间接的方式指回该对象本身，即循环引用，属性也会被忽略。
+         对包含循环引用的对象（对象之间相互引用，形成无限循环）执行此方法，会抛出错误。
+        */
+
+        //  js 六种基本类型：
+        //  null  undefined  boolean number  string  symbol
+        //  js 引用类型:
+        //  Function  Array  Object  RegExp  Date
+        //  其他类型 暂时不考虑
+
+        var undef ;
+        var nul = null;
+        var obj = {
+            name: 'zyx',
+            age: "18"
+        };
+        var str = 'hello world!';
+        var num = 16;
+        var func = function(){
+            console.log( "hello world" );
+        };
+        var sym = Symbol("sym");
+        var date = new Date();
+        var reg = new RegExp( 'a' );
+        var reg1 = /abc/i;
+        var arrObj =[ undef , nul , obj , str , num  , func , sym , date , reg ];
+        var obj2 = {
+            undef: undef,
+            nul:nul,
+            obj:obj,
+            str:str,
+            num:num,
+            func:func,
+            sym:sym,
+            date:date,
+            "reg1":reg1
+        };
+        console.log( JSON.stringify( undef ) )
+        console.log( myStringify( undef ) )
+        console.log( Object.prototype.toString.call(   undef  ) )
+        console.log( Object.prototype.toString.call(   JSON.stringify( undef ) ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( nul ) )
+        console.log( myStringify( nul ) )
+        console.log( Object.prototype.toString.call(  nul ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( nul )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( obj ) )
+        console.log( myStringify( obj ) )
+        console.log( Object.prototype.toString.call(  obj  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( obj )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( str ) )
+        console.log( myStringify( str ) )
+        console.log( Object.prototype.toString.call(  str ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( str )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( num ) )
+        console.log( myStringify( num ) )
+        console.log( Object.prototype.toString.call(  num  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( num )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( func ) )
+        console.log( myStringify( func ) )
+        console.log( Object.prototype.toString.call(  func  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( func )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( sym ) )
+        console.log( myStringify( sym ) )
+        console.log( Object.prototype.toString.call(  sym  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( sym )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( date )
+        console.log( JSON.stringify( date ) )
+        console.log( myStringify( date ) )
+        console.log( Object.prototype.toString.call(  date  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( date )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( reg ) )
+        console.log( myStringify( reg ) )
+        console.log( Object.prototype.toString.call(  reg  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( reg )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( reg1 ) )
+        console.log( myStringify( reg1 ) )
+        console.log( Object.prototype.toString.call(  reg1  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( reg1 )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( arrObj ) )
+        console.log( myStringify( arrObj ) )
+        console.log( Object.prototype.toString.call(  arrObj ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( arrObj )  ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( obj2 ) )
+        console.log( myStringify( obj2 ) )
+        console.log( Object.prototype.toString.call(  obj2  ) )
+        console.log( Object.prototype.toString.call(  JSON.stringify( obj2 )  ) )
+
+
+        function myStringify( obj ){
+            var type = Object.prototype.toString.call( obj );
+            if( type == "[object Undefined]" || type == "[object Symbol]" || type == "[object Function]" ){
+                return undefined;
+            }else if( type == "[object RegExp]" ){
+                return '{}';
+            }else if( type == "[object Object]" ){
+                var str = '{';
+                for( var key in obj ){
+                    var typeKey = Object.prototype.toString.call( obj[ key ] );
+                    if( typeKey == "[object Undefined]" || typeKey == "[object Symbol]" || typeKey == "[object Function]" ){
+                        str += '';
+                    }else if( type == "[object String]" || typeKey == "[object Null]" || type == "[object Date]" || type == "[object Number]" ){
+                        str += '"'+ key +'":'+ String( obj[ key ] ) + ',';
+                    }else if( type == "[object RegExp]"){
+                        str += '"'+ key +'":' + '{}' + ',';
+                    }else if( type == "[object Array]"){
+                        str += '"'+ key +'":' +  myStringify( obj[ key ] ) + ',';
+                    }else if( type == "[object Object]"){
+                        str += '"'+ key +'":' +  myStringify( obj[ key ] ) + ',';
+                    }
+                }
+                str = (str .substring(str .length - 1) == ',') ? str .substring(0, str .length - 1) : str ;
+
+                str += '}';
+                return str;
+            }else if( type == "[object Array]" ){
+                var str ='[';
+                for( var key in obj ){
+                    var typeKey = Object.prototype.toString.call( obj[ key ] );
+                    if( typeKey == "[object Undefined]" || typeKey == "[object Null]" || typeKey == "[object Symbol]" || typeKey == "[object Function]" ){
+                        str += 'null';
+                    }else if( type == "[object String]" || type == "[object Date]" || type == "[object Number]" ){
+                        str += String( obj[ key ] );
+                    }else if( type == "[object RegExp]"){
+                        str += '{}';
+                    }else if( type == "[object Array]"){
+                        str +=  myStringify( obj[ key ] );
+                    }else if( type == "[object Object]"){
+                        str +=  myStringify( obj[ key ] );
+                    }
+                    if( key != obj.length-1 ){
+                        str += ',';
+                    }
+                }
+                str += ']';
+                return str;
+            }else if( type == "[object String]" ){
+                return '"'+ obj + '"';
+            }else if( type == "[object Date]" ){
+                return obj.toString();
+            }else{
+                // type = " Null   String   Date  number"
+                return String( obj );
+            }
+        }
+       console.log(  myStringify( obj2 ) );
+
+        //当type 为Date 的时候 略有缺陷 时间格式与 JSON.stringify 不一样
+        // JSON.stringify( Date )  转换之后的时间为  格林尼治时间  与 北京时间 相差 8小时
+        // 以下方法 重写 为 北京时间的方法 （ 小瑕疵 ：与 JSON.stringify（ date ）转换后的时间 格式 不相同  ）
+
+        /*function dateFormat(date, fmt) {
+         if (null == date || undefined == date) return '';
+         var o = {
+         "M+": date.getMonth() + 1, //月份
+         "d+": date.getDate(), //日
+         "h+": date.getHours(), //小时
+         "m+": date.getMinutes(), //分
+         "s+": date.getSeconds(), //秒
+         "S": date.getMilliseconds() //毫秒
+         };
+         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+         for (var k in o)
+         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+         return fmt;
+         }
+         Date.prototype.toJSON = function () { return dateFormat(this,'yyyy-MM-dd hh:mm:ss S')};*/
+    </script>
+</body>
+</html>
