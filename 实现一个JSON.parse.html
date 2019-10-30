@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个JSON.parse</title>
+</head>
+<body>
+    <script>
+        var jsonStr  = '{ "age": 20, "name": "jack" }';
+
+        //第一种 直接使用 eval
+        function myParse( json ){
+            return eval( '('+json+')' );
+        }
+        console.log( myParse( jsonStr ) )
+
+        //第二种 使用new Function
+        var  dat = new Function(  "console.log("+ jsonStr +")" )
+
+    </script>
+</body>
+</html>

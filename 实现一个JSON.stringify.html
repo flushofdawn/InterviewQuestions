@@ -21,6 +21,7 @@
         //  其他类型 暂时不考虑
 
         var undef ;
+        var boolean = true;
         var nul = null;
         var obj = {
             name: 'zyx',
@@ -35,7 +36,7 @@
         var date = new Date();
         var reg = new RegExp( 'a' );
         var reg1 = /abc/i;
-        var arrObj =[ undef , nul , obj , str , num  , func , sym , date , reg ];
+        var arrObj =[ undef , nul , obj , str , num  , func , sym , date , reg , true];
         var obj2 = {
             undef: undef,
             nul:nul,
@@ -45,12 +46,19 @@
             func:func,
             sym:sym,
             date:date,
-            "reg1":reg1
+            "reg1":reg1,
+            boolean: true
         };
+
         console.log( JSON.stringify( undef ) )
         console.log( myStringify( undef ) )
         console.log( Object.prototype.toString.call(   undef  ) )
         console.log( Object.prototype.toString.call(   JSON.stringify( undef ) ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( boolean ) )
+        console.log( myStringify( boolean ) )
+        console.log( Object.prototype.toString.call(   boolean  ) )
+        console.log( Object.prototype.toString.call(   JSON.stringify( boolean ) ) )
         console.log( "-----------------------------------------------------------" )
         console.log( JSON.stringify( nul ) )
         console.log( myStringify( nul ) )
@@ -121,7 +129,7 @@
                     var typeKey = Object.prototype.toString.call( obj[ key ] );
                     if( typeKey == "[object Undefined]" || typeKey == "[object Symbol]" || typeKey == "[object Function]" ){
                         str += '';
-                    }else if( type == "[object String]" || typeKey == "[object Null]" || type == "[object Date]" || type == "[object Number]" ){
+                    }else if( type == "[object String]" || typeKey == "[object Null]" || type == "[object Date]" || type == "[object Number]" || type == "[object Boolean]" ){
                         str += '"'+ key +'":'+ String( obj[ key ] ) + ',';
                     }else if( type == "[object RegExp]"){
                         str += '"'+ key +'":' + '{}' + ',';
@@ -141,7 +149,7 @@
                     var typeKey = Object.prototype.toString.call( obj[ key ] );
                     if( typeKey == "[object Undefined]" || typeKey == "[object Null]" || typeKey == "[object Symbol]" || typeKey == "[object Function]" ){
                         str += 'null';
-                    }else if( type == "[object String]" || type == "[object Date]" || type == "[object Number]" ){
+                    }else if( type == "[object String]" || type == "[object Date]" || type == "[object Number]" || type == "[object Boolean]" ){
                         str += String( obj[ key ] );
                     }else if( type == "[object RegExp]"){
                         str += '{}';
@@ -161,7 +169,7 @@
             }else if( type == "[object Date]" ){
                 return obj.toString();
             }else{
-                // type = " Null   String   Date  number"
+                // type = " Null number Boolean"
                 return String( obj );
             }
         }
@@ -170,6 +178,8 @@
         //当type 为Date 的时候 略有缺陷 时间格式与 JSON.stringify 不一样
         // JSON.stringify( Date )  转换之后的时间为  格林尼治时间  与 北京时间 相差 8小时
         // 以下方法 重写 为 北京时间的方法 （ 小瑕疵 ：与 JSON.stringify（ date ）转换后的时间 格式 不相同  ）
+
+        //若要启用 将 以下代码 放在 script 标签的 顶部
 
         /*function dateFormat(date, fmt) {
          if (null == date || undefined == date) return '';
