@@ -48,11 +48,7 @@
             console.log( content )
             var result;
             if( arguments[1] ){
-                if( Object.prototype.toString.call( arguments[1] ) == "[object Array]" ){
-                    result = content.fn( ...arguments[1] );
-                } else {
-                    throw Error( "not a arr" );
-                }
+                result = content.fn( ...arguments[1] );
             }else{
                 result = content.fn( );
             }
@@ -68,13 +64,13 @@
 
         Function.prototype.call22 = function(){
              var fn = typeof arguments[0] == undefined ? window : arguments[0];
-
-
-
-
         }
 
         say.newApply( foo2 , "a1" );
+
+
+
+
 
     </script>
 </body>

@@ -21,6 +21,7 @@
         //  其他类型 暂时不考虑
 
         var undef ;
+        var notNum=0/0;
         var boolean = true;
         var nul = null;
         var obj = {
@@ -36,9 +37,10 @@
         var date = new Date();
         var reg = new RegExp( 'a' );
         var reg1 = /abc/i;
-        var arrObj =[ undef , nul , obj , str , num  , func , sym , date , reg , true];
+        var arrObj =[ undef ,notNum, nul , obj , str , num  , func , sym , date , reg , true];
         var obj2 = {
             undef: undef,
+            notNum: notNum,
             nul:nul,
             obj:obj,
             str:str,
@@ -47,6 +49,7 @@
             sym:sym,
             date:date,
             "reg1":reg1,
+            arr : [1,2,3],
             boolean: true
         };
 
@@ -54,6 +57,11 @@
         console.log( myStringify( undef ) )
         console.log( Object.prototype.toString.call(   undef  ) )
         console.log( Object.prototype.toString.call(   JSON.stringify( undef ) ) )
+        console.log( "-----------------------------------------------------------" )
+        console.log( JSON.stringify( notNum ) )
+        console.log( myStringify( notNum ) )
+        console.log( Object.prototype.toString.call(   notNum  ) )
+        console.log( Object.prototype.toString.call(   JSON.stringify( notNum ) ) )
         console.log( "-----------------------------------------------------------" )
         console.log( JSON.stringify( boolean ) )
         console.log( myStringify( boolean ) )
@@ -197,6 +205,51 @@
          return fmt;
          }
          Date.prototype.toJSON = function () { return dateFormat(this,'yyyy-MM-dd hh:mm:ss S')};*/
+
+        // 练：
+
+        // js 数据基本类型: undefined  boolean  null  string  number  symbol
+
+        // undefined  ———>>  undefined ( 非字符串 )
+        // boolean  ———>>  'true'  or  'false' ( 字符串 )
+        // null  ———>>  'null'  ( 字符串 )
+        // string  ———>>  string  ( 字符串 )
+        // number  ———>>  'number' ( 字符串  NaN —> null )
+        // symbol  ———>>  undefined ( 非字符串 )
+
+        // js 数据引用类型: Object  Function  RegExp  Date  Array
+
+        //  Object ———>> '{
+        //      undefined , Symbol , Function  ->    没了
+        //      boolean  ->    boolean
+        //      null     ->    null
+        //      string   ->    string
+        //      number   ->    number     isNaN(NaN)    NaN ——> null
+        //      RegExp   ->    {}
+        //      Array   ->    Array
+        // }' ( 字符串 )
+
+        //  Function ———>> Undefined ( 非字符串 )
+        //  RegExp ———>> '{}' ( 字符串 )
+        //  Date ———>> 'Date' ( 字符串 , 格林尼治时间 )
+        //  Array ———>>  '{
+        //      undefined , Symbol , Function  ->    null
+        //      boolean  ->    boolean
+        //      null     ->    null
+        //      string   ->    string
+        //      number   ->    number
+        //      RegExp   ->    {}
+        //      Array   ->    Array
+        // }' ( 字符串 )
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>
