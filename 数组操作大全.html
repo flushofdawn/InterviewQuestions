@@ -76,6 +76,7 @@
             return  b - a
         }
         console.log( a.sort(sortNumber ) );        //  [5, 4, 3, 2, 1]
+        console.log( a );        //  [5, 4, 3, 2, 1]
 
         // 10 ——>> toString() 方法可把数组转换为字符串，并返回结果。不会改变现有的数组
         var a = [1,2,3,4,5];
@@ -85,6 +86,13 @@
         var a = [1,2,3];
         console.log( a.unshift(4,5) );            //  5
         console.log( a );                         //  [4, 5, 1, 2, 3]
+
+
+
+        //总结，
+        //以上数组操作会改变原数组的 方法 有  1.pop() 2.push() 3.reverse() 4.shift() 5.splice() 6.sort() 7.unshift()
+
+
     </script>
 </body>
 </html>
