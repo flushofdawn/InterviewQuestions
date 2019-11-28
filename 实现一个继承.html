@@ -16,7 +16,7 @@
         Person.prototype.age = 18;
         Person.prototype.say = function(){
             console.log( 'my name is ' + this.name );
-        }
+        };
 
         // 第一种:   原型链继承
         function Per() {
@@ -32,7 +32,7 @@
             this.age = 12;
         }
         var con = new Con();
-
+        console.log( con )
         //第三种：  组合继承
         function SubType( name ){
             Person.call( this, name );
@@ -63,6 +63,31 @@
         var child = new Child("son" , "father");
         console.log( child )*/
 
+
+       // 寄生组合式继承 ( 终极解决方案 )
+        function animal(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        animal.prototype.run = function () {
+            console.log( this.name + " is running" )
+        }
+        function cat( name , age , color , type ){
+            animal.call( this , name , age )
+            this.color = color;
+            this.type = type;
+        }
+        function F(){};
+        F.prototype = animal.prototype;
+        cat.prototype = new F();
+        cat.prototype.constructor = cat;
+
+        var catA = new cat('喵太郎','1','black',"中国田园");
+        catA.run();
+        console.log( catA )
+        var catB = new animal('喵太郎B','1');
+        catB.run();
+        console.log( catB )
     </script>
 </body>
 </html>

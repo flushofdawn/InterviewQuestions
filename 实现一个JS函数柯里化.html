@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个JS函数柯里化</title>
+</head>
+<body>
+
+    <script>
+        /*
+         什么是  柯里化 ？
+         在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，
+         并且返回接受余下的参数且返回结果的新函数的技术。
+        */
+
+        /*function curry (){
+            var args = Array.prototype.shift.call( arguments );
+            var fn = function () {
+                var newArgs = args.concat( Array.prototype.shift.call( arguments ) );
+                return multi.apply( ths, newArgs )
+            }
+            fn.toString = function () {
+                return args.reduce(function(a , b){
+                    return a * b;
+                })
+            }
+            return fn;
+        }
+        function multiFn ( a, b, c ) {
+            return a * b * c;
+        }
+        var  multi  = curry ( multiFn );
+
+        console.log( multiFn( 2 )( 2 )( 3 ) )
+        console.log( multiFn( 1 , 2 )( 3 ) )
+        console.log( multiFn( 1 )( 2 )( 3 ) )*/
+
+        var add = function(){
+         let sum = 0;
+         for(let i=0,len=arguments.length;i<len;i++){
+         sum += arguments[i];
+         }
+         return sum;
+         }
+
+         var sum = function(){
+         var args = Array.prototype.slice.call(arguments); // args形成闭包，存储所有待求和的参数
+         console.log( args )
+         console.log( arguments )
+
+         var __curry = function(){
+         if(arguments.length === 0){
+         return add.apply(this,args); //无参数时直接返回求和的值
+         }else{
+         args = args.concat(Array.prototype.slice.call(arguments));//如果后续继续有参数，直接返回该函数
+         console.log(args);
+         return __curry; //
+         }
+         }
+         return __curry;
+         }
+
+         console.log(sum(1,2)()); // 3
+         console.log(sum(4)(5)(6)()); // 15
+
+        const curry = (fn, ...arg) => {
+            let all = arg || [],
+                    length = fn.length;
+            return (...rest) => {
+                let _args = all;
+                _args.push(...rest);
+                if (rest.length === 0) {
+                    all=[];
+                    return fn.apply(this, _args);
+                } else {
+                    return curry.call(this, fn, ..._args);
+                }
+            }
+        }
+        let test = curry(function(...rest) {
+            let args = rest.map(val => val * 10);
+            console.log(args);
+        })
+        test(2)();
+    </script>
+</body>
+</html>

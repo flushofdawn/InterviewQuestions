@@ -15,16 +15,17 @@
          注： instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
           instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。
         */
-        var obj = {
+        /*var obj = {
             init: 1,
             add: function(a, b) {
+                console.log( this );
                 console.log( a )
                 console.log( b )
                 console.log( this.init )
                 console.log( '_______________________________________________' )
                 return a + b + this.init;
             }
-        }
+        }*/
 
         Function.prototype.newBind = function (  content ){
             if( typeof this != 'function' ){
@@ -65,13 +66,47 @@
         };*/
 
         var add = function(a,b){
+            console.log( a+b )
+            console.log( this )
             return a+b;
         }
         var sub = function(a,b){
-            console.log( a-b )
+            console.log( this )
             return a-b;
         }
 
+
+       /* Function.prototype.neBind = function(){
+            if( typeof this != "function" ){
+                throw Error( "not a function !" );
+            }
+            var fn = this;
+            var args = [...arguments].slice(1);
+            var resFn = function () {
+
+                return fn.apply( this instanceof resFn ? this : arguments[0] , args.concat( ...arguments ) );
+            }
+            function tmp (){}
+            tmp.prototype = this.prototype
+            resFn.prototype = new tmp()
+            return resFn;
+        }*/
+
+        window.name = "jack";
+        var obj = {
+            name:'rose',
+            say:function (){
+                console.log( this.name );
+            }
+        }
+
+        obj.say();
+
+        var iSay =  obj.say;
+        iSay()
+
+        var heSay = iSay.newBind( obj );
+        heSay();
 
 
     </script>

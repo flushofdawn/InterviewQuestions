@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组操作大全</title>
+</head>
+<body>
+
+    <script>
+        /*
+            new Array();
+            new Array(size);
+            new Array(element0, element1, ..., elementn);
+        */
+        var arr1 = new Array();
+        console.log( arr1 + " - " + typeof(arr1) ); //   - object
+
+        var arr2_1 = new Array(3);  //只传递给它一个数字参数,表示这个数组的长度!
+        var arr2_2 = new Array("3");  //
+        console.log( arr2_1.length +" - "+ arr2_2.length );  // 3 - 1
+
+        var arr3 = new Array(1,2,3);
+        console.log( arr3 );  // [1, 2, 3]
+
+        // ----- 数组操作 ------
+        // 1 ——>>  concat() 连接两个或多个数组 , 不会改变现有的数组
+        var a = [1,2,3];
+        console.log( a.concat(4,5) );   //  [1, 2, 3, 4, 5]
+        console.log( a.concat(a,a) );   //  [1, 2, 3, 1, 2, 3, 1, 2, 3]
+        console.log( a );               //  [1, 2, 3]
+
+        // 2 ——>>  join() 方法用于把数组中的所有元素放入一个字符串（默认逗号间隔）, 不会改变现有的数组
+        var a = [1,2,3];
+        console.log( a.join() );        // 1,2,3
+        console.log( a.join('-') );     // 1-2-3
+
+        // 3 ——>>  pop() 方法用于删除并返回数组的最后一个元素。 !! 会改变原数组
+        var a = [1,2,3];
+        var b = [];
+        console.log( a.pop() );         // 3
+        console.log( a );               // 1-2
+        console.log( b.pop() );         // 空数组执行时，会返回undefined
+        console.log( b );         // 空数组执行时，会返回undefined
+
+        // 4 ——>>  push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。 !! 会改变原数组
+        var a = [1,2,3];
+        console.log( a.push(4) );       // 4
+        console.log( a );               // [1, 2, 3, 4]
+
+        // 5 ——>>  reverse()  方法用于颠倒数组中元素的顺序。 !! 会改变原数组
+        var a = [1,2,3];
+        console.log( a.reverse() );     // [3, 2, 1]
+        console.log( a );               // [3, 2, 1]
+
+        // 6 ——>>  shift()方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。 !! 会改变原数组
+        var a = [1,2,3];
+        console.log( a.shift() );       //  1
+        console.log( a );               //  [2, 3]
+
+        // 7 ——>>  slice() 方法可从已有的数组中返回选定的元素。 不会改变现有的数组
+        var a = [1,2,3,4,5];
+        console.log( a.slice(0,2) );     //  [1, 2]
+        console.log( a );                //  [ 1, 2, 3, 4, 5]
+
+        // 8 ——>>  splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。( 前两个参数 为删除操作 提供参数，之后的参数 会添加到数组的头部 ) !! 会改变原数组
+        var a = [1,2,3,4,5];
+        var b = [1,2];
+        console.log( a.splice(0,2,6,7) );         //   [1, 2]
+        console.log( a.splice(null,null,b) );     //  []
+        console.log( a );                         //  [[1, 2], 6, 7, 3, 4, 5]
+
+        // 9 ——>>  sort() 方法用于对数组的元素进行排序。 !! 会改变原数组
+        var a = [1,2,3,4,5];
+        function sortNumber(a,b)
+        {
+            return  b - a
+        }
+        console.log( a.sort(sortNumber ) );        //  [5, 4, 3, 2, 1]
+
+        // 10 ——>> toString() 方法可把数组转换为字符串，并返回结果。不会改变现有的数组
+        var a = [1,2,3,4,5];
+        console.log( a.toString() );              //  1,2,3,4,5
+
+        // 11 ——>> unshift() 方法可向数组的开头添加一个或更多元素，并返回新的长度。 !! 会改变原数组
+        var a = [1,2,3];
+        console.log( a.unshift(4,5) );            //  5
+        console.log( a );                         //  [4, 5, 1, 2, 3]
+    </script>
+</body>
+</html>

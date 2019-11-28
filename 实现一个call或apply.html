@@ -22,7 +22,7 @@
         window.foo3 = {
             value: 108
         }
-       /* Function.prototype.newCall = function ( content  ){
+        Function.prototype.newCall = function ( content  ){
             content  =    ( content != undefined ? content : window )
             content.fn = this
             console.log( arguments )
@@ -32,7 +32,7 @@
             let result = content.fn( ...args );
             delete content.fn;
             return result;
-        }*/
+        }
         Function.prototype.newCall = function (  ){
             arguments[0]  =    ( arguments[0] != undefined ? arguments[0] : window )
             arguments[0].fn = this
@@ -44,8 +44,6 @@
         Function.prototype.newApply = function ( content ){
             content  =    ( content != undefined ? content : window )
             content.fn = this
-            console.log( arguments )
-            console.log( content )
             var result;
             if( arguments[1] ){
                 result = content.fn( ...arguments[1] );
@@ -56,19 +54,17 @@
             return result;
         }
         var foo2 = {
-            value:10
+            value:18
         }
-        function say(name){
-            console.log( name )
-        }
-
-        Function.prototype.call22 = function(){
-             var fn = typeof arguments[0] == undefined ? window : arguments[0];
+        function say(name,age){
+            console.log( name );
+            console.log( age );
+            console.log( this.value );
         }
 
-        say.newApply( foo2 , "a1" );
 
-
+        say.newCall( foo2 , "name1", "age1" );
+        say.newApply( foo2 , ["name2", "age2" ] );
 
 
 
