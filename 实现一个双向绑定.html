@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="myInput" value="123" /><br>
+        <span id="show" onclick="show()">123</span>
+    </div>
+    <script>
+        var inputs = document.getElementById("myInput");
+        var font = document.getElementById("show");
+        var obj = {  };
+        var text = inputs.value;
+        inputs.oninput = function () {
+            obj.text = this.value;
+        }
+
+        Object.defineProperty(obj,"text",{
+            get:function(){
+                return text;
+            },
+            set:function(value){
+                text = value;
+                font.innerText = value;
+            }
+        })
+        console.log( obj.text )
+        function show(){
+            console.log( text );
+        }
+    </script>
+</body>
+</html>

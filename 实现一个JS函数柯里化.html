@@ -36,31 +36,29 @@
         console.log( multiFn( 1 )( 2 )( 3 ) )*/
 
         var add = function(){
-         let sum = 0;
-         for(let i=0,len=arguments.length;i<len;i++){
-         sum += arguments[i];
-         }
-         return sum;
-         }
-
-         var sum = function(){
-         var args = Array.prototype.slice.call(arguments); // args形成闭包，存储所有待求和的参数
-         console.log( args )
-         console.log( arguments )
-
-         var __curry = function(){
-         if(arguments.length === 0){
-         return add.apply(this,args); //无参数时直接返回求和的值
-         }else{
-         args = args.concat(Array.prototype.slice.call(arguments));//如果后续继续有参数，直接返回该函数
-         console.log(args);
-         return __curry; //
-         }
-         }
-         return __curry;
+             let sum = 0;
+             for(let i=0,len=arguments.length;i<len;i++){
+                sum += arguments[i];
+             }
+             return sum;
          }
 
-         console.log(sum(1,2)()); // 3
+         function sum(){
+             var args = Array.prototype.slice.call(arguments); // args形成闭包，存储所有待求和的参数
+
+             var __curry = function(){
+                 if(arguments.length === 0){
+                    return add.apply(this,args); //无参数时直接返回求和的值
+                 }else{
+                     args = args.concat(Array.prototype.slice.call(arguments));//如果后续继续有参数，直接返回该函数
+                     return __curry; //
+                 }
+             }
+             return __curry;
+         }
+        console.log(sum(1,2)());
+        console.log(sum(4)(5)(6)());
+         /*console.log(sum(1,2)()); // 3
          console.log(sum(4)(5)(6)()); // 15
 
         const curry = (fn, ...arg) => {
@@ -81,7 +79,41 @@
             let args = rest.map(val => val * 10);
             console.log(args);
         })
-        test(2)();
+        test(2)();*/
+
+        function addNum(  ){
+            var sum = 0;
+            for( var i=0;i<arguments.length;i++ ){
+                sum+= arguments[i];
+            }
+            console.log( sum )
+        }
+        var sumNum = function (){
+            var arg = [...arguments];
+            console.log( arg )
+            var _curry = function () {
+                console.log( [...arguments] );
+                if( [...arguments].length == 0 ){
+                    return addNum.apply( this , arg )
+                }else{
+                    arg = arg.concat( [...arguments] )
+                    console.log( arg )
+                    return _curry;
+                }
+
+            }
+            return _curry;
+        }
+        sumNum( 5 )( 2 )( 3 )();
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 </html>

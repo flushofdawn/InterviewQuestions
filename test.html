@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div style="width: 100px;height: 100px" id="div">
+        <input type="text" id="myInput" value="123" /><br>
+        <span id="show" onclick="show()">123</span>
+    </div>
+    <script>
+        /*async function async1() {
+            console.log("async1 start");
+            await  async2();
+            console.log("async1 end");
+
+        }
+        async  function async2() {
+            console.log( 'async2');
+        }
+        console.log("script start");
+        setTimeout(function () {
+            console.log("settimeout");
+        },0);
+        async1();
+        new Promise(function (resolve) {
+            console.log("promise1");
+            resolve();
+        }).then(function () {
+            console.log("promise2");
+        });
+        console.log('script end');*/
+        var inputs = document.getElementById("myInput");
+        var font = document.getElementById("show");
+        var obj = {  };
+        var text = inputs.value;
+        inputs.oninput = function () {
+            obj.text = this.value;
+        }
+
+        Object.defineProperty(obj,"text",{
+            get:function(){
+                return text;
+            },
+            set:function(value){
+                text = value;
+                font.innerText = value;
+            }
+        })
+        console.log( obj.text )
+        function show(){
+            console.log( text );
+        }
+    </script>
+</body>
+</html>

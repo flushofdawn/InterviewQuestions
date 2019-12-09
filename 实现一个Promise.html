@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现一个Promise</title>
+</head>
+<body>
+    <script>
+        function myPromise(constructor){
+            let self = this;
+            self.status = "pending";
+            self.value = undefined;
+            self.reason = undefined;
+
+            function resolve(value){
+                if( self.status === "pending" ){
+                    self.value = value;
+                    console.log( self.value )
+                    self.status = "resolved";
+                }
+            }
+            function reject(reason) {
+                if( self.status === "pending" ){
+                    self.reason = reason;
+                    console.log( self.reason )
+                    self.status = "rejected";
+                }
+            }
+            try {
+                constructor( resolve , reject  );
+            }catch( e ){
+                reject( e );
+            }
+        }
+        myPromise.prototype.then = function(func1,func2){
+            let self = this;
+            switch( self.status ){
+                case  "resolved" :
+                    console.log( 1 );
+                    func1( self.value );
+                    break;
+                case  "rejected" :
+                    func2( self.reason );
+                    break;
+                default:
+                    break;
+            }
+        }
+        function multiply(input) {
+            return new myPromise(function (resolve, reject) {
+                console.log('calculating ' + input + ' x ' + input + '...');
+                setTimeout(resolve, 500, input * input);
+            });
+        }
+
+        // 0.5秒后返回input+input的计算结果:
+        function add(input) {
+            return new myPromise(function (resolve, reject) {
+                console.log('calculating ' + input + ' + ' + input + '...');
+                setTimeout(resolve, 500, input + input);
+            });
+        }
+        var p = new myPromise(function (resolve, reject) {
+            console.log('start new Promise...');
+            resolve(123);
+        });
+        function num() {
+            var num = Math.random() * 2;
+            if( num > 1 ){
+                return new myPromise(function (resolve, reject) {
+                    console.log('成功：num: '+num);
+                    setTimeout(resolve, 500);
+                });
+            }else{
+                return new myPromise(function (resolve, reject) {
+                    console.log('失败：num: '+num);
+                    setTimeout(reject, 500);
+                });
+            }
+
+        }
+        p.then(num)
+        /*.then(add).then(multiply).then(add).then(function (result) {
+            console.log('Got value: ' + result);
+        });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

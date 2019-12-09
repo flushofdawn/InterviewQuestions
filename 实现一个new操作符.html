@@ -21,11 +21,6 @@
 
         function _new(){
 
-            if( typeof arguments[0] != 'function' ){
-
-                throw Error( 'not a function' );
-
-            }
             var newObj = {};
 
             if( arguments[0].prototype != null ){
@@ -40,10 +35,13 @@
 
         }
 
-        let d =  _new( Bar , 10 );
+
+        let d =  _new( Bar , 3 );
         let e =  new Bar( 10 );
         console.log( d )
         console.log( e )
+
+
 
     </script>
 </body>
