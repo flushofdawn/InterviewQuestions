@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+
+        var undef = undefined;
+        var nul = null;
+        var num1 = 0;
+        var str = "str";
+        var boolean = false;
+        var sym = Symbol("a");
+        var arr = [1,2,3];
+        var obj = {name:"aa",age:'18'};
+        var fun = function () {
+            console.log("hello")
+        };
+        console.log( "undef typeof - "+ typeof ( undef ) );
+        console.log( "nul typeof - "+ typeof ( nul ) );
+        console.log( "num1 typeof - "+ typeof ( num1 ) );
+        console.log( "str typeof - "+ typeof ( str ) );
+        console.log( "boolean typeof - "+ typeof ( boolean ) );
+        console.log( "sym typeof - "+ typeof ( sym ) );
+        console.log( "arr typeof - "+ typeof ( arr ) );
+        console.log( "obj typeof - "+ typeof ( obj ) );
+        console.log( "fun typeof - "+ typeof ( fun ) );
+        console.log( "----------------------------------" );
+
+        /* console.log( "undef instanceof - "+ ( undef  instanceof Undefined ) );  //ReferenceError: Undefined is not defined  */
+        /* console.log( "nul typeof - "+ ( nul  instanceof Null ) );  //Null is not defined  */
+        console.log( "num - "+ ( new Number(1) instanceof Number ) );
+        console.log( "str - "+ ( new String('1') instanceof String ) );
+        console.log( "boolean - "+ ( new Boolean(false) instanceof Boolean ) );
+        console.log( "arr - "+ ( new Array(1,2,3) instanceof Array ) );
+        console.log( "RegExp - "+ ( new RegExp() instanceof RegExp ) );
+        console.log( "Object - "+ ( new Object({}) instanceof Object ) );
+        console.log( "Function - "+ ( new Function() instanceof Function ) );
+
+        //
+    </script>
+</body>
+</html>
