@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>根据先序遍历和中序遍历生成二叉树</title>
+</head>
+<body>
+    <script>
+        /* 定义节点 */
+        function TreeNode(x) {
+            this.val = x;
+            this.left = null;
+            this.right = null;
+        }
+        /* 定义二叉树生成方法 */
+        function tree() {
+            this.root = null;
+            this.show = ()=>{
+                console.log(this.root);
+            }
+            this.insertNode = function (data) {
+                var node = new TreeNode(data);
+                if (this.root == null) {
+                    this.root = node;
+                    return;
+                } else {
+                    var thisNode = this.root
+                    var notEnd = true;
+                    while (notEnd) {
+                        if (data < thisNode.val) {
+                            if ( thisNode.left ) {
+                                thisNode = thisNode.left
+                            } else {
+                                thisNode.left = node
+                                notEnd = false;
+                            }
+                        } else {
+                            if ( thisNode.right ) {
+                                thisNode = thisNode.right
+                            } else {
+                                thisNode.right = node;
+                                notEnd = false;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        var arr1 = [10,5,8,6,20,15,11,18];  //先序遍历 数组
+        var arr2 = [5,6,8,10,11,15,18,20];  //中序遍历 数组
+        /* 实例 一个二叉树 */
+        const bst = new tree();
+        arrOpt( arr1 , arr2 );
+        bst.show();
+
+        /* 根据排序插入元素 */
+        function arrOpt( pre , mid ){
+             /*
+
+             1、由先序遍历特征，根节点必在先序序列首部；
+             2、根据先序找到首部，去分割中序遍历的数组，可以得到左中序子树，右中序子树；
+             3、在先序遍历中查找 左中序子树 和 右中序子树 中的元素，并且 根据 先序遍历 中的顺序 生成 新的 左先序子树 和 右先序子树；
+             4、循环调用该方法；
+
+            */
+            if( pre.length == 0 ){
+                return;
+            }
+            bst.insertNode( pre[0] );
+
+            if( pre.length > 1 || mid.length > 1 ){
+                var arrA = mid.splice(  0 , mid.indexOf( pre[0] )  );
+                var arrB = mid.splice( mid.indexOf( pre[0] ) + 1 , mid.length );
+                var newPreA = newArr( arrA , pre );
+                var newPreB = newArr( arrB , pre );
+                arrOpt( newPreA , arrA)
+                arrOpt( newPreB , arrB )
+            }
+        }
+        function newArr( childArr, allArr ) {
+            var newA = [];
+            for( var i = 0;i<allArr.length; i++ ){
+                for( var j = 0;j<childArr.length; j++ ){
+                    if(  allArr[i] == childArr[j]  ){
+                        newA.push( allArr[i] );
+                    }
+                }
+            }
+            return newA;
+        }
+        
+
+      /*  const bst = new tree();
+        bst.insertNode(13);
+        bst.insertNode(21);
+        bst.insertNode(21);
+        bst.insertNode(15);
+        bst.insertNode(29);
+        bst.insertNode(3);
+        bst.show();*/
+    </script>
+</body>
+</html>

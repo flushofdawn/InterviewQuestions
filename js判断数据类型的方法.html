@@ -18,16 +18,27 @@
         var fun = function () {
             console.log("hello")
         };
-        console.log( "undef typeof - "+ typeof ( undef ) );
-        console.log( "nul typeof - "+ typeof ( nul ) );
-        console.log( "num1 typeof - "+ typeof ( num1 ) );
-        console.log( "str typeof - "+ typeof ( str ) );
-        console.log( "boolean typeof - "+ typeof ( boolean ) );
-        console.log( "sym typeof - "+ typeof ( sym ) );
-        console.log( "arr typeof - "+ typeof ( arr ) );
-        console.log( "obj typeof - "+ typeof ( obj ) );
-        console.log( "fun typeof - "+ typeof ( fun ) );
+    console.log( sym.__proto__ )
+    console.log( sym.prototype )
+
+        //   typeof : 可以判断7种类型， 基本类型 undefined Number String Boolean Symbol 引用类型 Function Object
+        //      基本类型中的 Null --> Object，其他不变
+        //      引用类型 除了Function 全部转化为 --> Object
+
+        console.log( "undef typeof - "+ typeof ( undef ) );            //undef typeof - undefined
+        console.log( "nul typeof - "+ typeof ( nul ) );                //nul typeof - object
+        console.log( "num1 typeof - "+ typeof ( num1 ) );              //num1 typeof - number
+        console.log( "str typeof - "+ typeof ( str ) );                //str typeof - string
+        console.log( "boolean typeof - "+ typeof ( boolean ) );        //boolean typeof - boolean
+        console.log( "sym typeof - "+ typeof ( sym ) );                //sym typeof - symbol
+        console.log( "arr typeof - "+ typeof ( arr ) );                //arr typeof - object
+        console.log( "obj typeof - "+ typeof ( obj ) );                //obj typeof - object
+        console.log( "fun typeof - "+ typeof ( fun ) );                //fun typeof - function
         console.log( "----------------------------------" );
+
+
+
+        //  instanceof ：instanceof用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。
 
         /* console.log( "undef instanceof - "+ ( undef  instanceof Undefined ) );  //ReferenceError: Undefined is not defined  */
         /* console.log( "nul typeof - "+ ( nul  instanceof Null ) );  //Null is not defined  */
@@ -38,7 +49,7 @@
         console.log( "RegExp - "+ ( new RegExp() instanceof RegExp ) );
         console.log( "Object - "+ ( new Object({}) instanceof Object ) );
         console.log( "Function - "+ ( new Function() instanceof Function ) );
-
+        console.log( new Number(1) );
         //
     </script>
 </body>

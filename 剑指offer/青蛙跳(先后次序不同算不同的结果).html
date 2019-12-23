@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /* 题目： 一只青蛙一次可以跳上1级台阶，也可以跳上2级。求该青蛙跳上一个n级的台阶总共有多少种跳法（先后次序不同算不同的结果）。*/
+        function jumpFloor(number)
+        {
+            let step = [1,2];
+            let maxTimeA = parseInt( number / step[0]  );
+            var arr = [];
+            for( var i = 0 ; i<= maxTimeA; i++ ){
+                if( ( number - ( i * step[0] )  ) % step[1] == 0 ){
+                    arr.push( [i,( number - ( i * step[0] )  ) / step[1]] );
+                }
+            }
+            var sum = 0;
+            for( var i=0;i<arr.length;i++ ){
+                all = arr[i][0] + arr[i][1];
+                allSum = 1;
+                arrASum = 1;
+                arrBSum = 1;
+                for( var j = all; j>1 ;j-- ){
+                    allSum = allSum*j;
+                }
+                for( var j = arr[i][0]; j>1 ;j-- ){
+                    arrASum = arrASum*j;
+                }
+                for( var j = arr[i][1]; j>1 ;j-- ){
+                    arrBSum = arrBSum*j;
+                }
+                sum += allSum / ( arrASum * arrBSum );
+            }
+            return sum;
+        }
+
+        function jumpFloor1(number) {
+            // write code here
+            if(number==1) return 1;
+            if(number==2) return 2;
+            var n1=1;
+            var n2=2;
+            var result=0;
+            for(var i=3;i<=number;i++){
+                result=n1+n2;
+                n1=n2;
+                n2=result;
+            }
+            console.log( result );
+            return result;
+        }
+        jumpFloor(26)
+        jumpFloor1(26)
+    </script>
+</body>
+</html>

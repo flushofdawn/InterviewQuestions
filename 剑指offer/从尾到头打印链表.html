@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>输入一个链表，按链表从尾到头的顺序返回一个ArrayList。</title>
+</head>
+<body>
+
+    <script>
+        /*输入一个链表，按链表从尾到头的顺序返回一个ArrayList。 */
+
+        function ListNode(x){
+            this.val = x;
+            this.next = null;
+        }
+        function printListFromTailToHead(head)
+        {
+            var arr =[];
+            getNext( head );
+            function getNext(data){
+                arr.push( data )
+                if( ListNode( data ).next == null || ListNode( data ).next == undefined ){
+                    return ;
+                }else{
+                    getNext( ListNode( data ).next )
+                }
+            }
+            arr.reverse();
+            // write code here
+        }
+    </script>
+</body>
+</html>
