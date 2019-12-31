@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .mydiv{
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: myfirst 2s linear;
+            animation-iteration-count: infinite;
+            margin: 0 auto;
+        }
+        .coin,.coin1{
+            width: 150px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+            background-color: aqua;
+            border: 1px solid #000;
+            border-radius: 50%;
+        }
+        .coin{
+            transform: translateZ(7px);
+        }
+        .coin1{
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateZ(-7px);
+            z-index: -1;
+        }
+        @keyframes myfirst
+        {
+            0%   {
+                transform:rotateY(0deg);
+            }
+            25%  {
+                transform:rotateY(90deg);
+            }
+            50%  {
+                transform:rotateY(180deg);
+            }
+            75%  {
+                transform:rotateY(270deg);
+            }
+            100% {
+                transform:rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+     <div class="mydiv">
+         <div class="coin">
+             正
+         </div>
+         <div class="coin1">
+             反
+         </div>
+     </div>
+</body>
+</html>
