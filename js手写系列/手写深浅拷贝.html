@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        function run(){
+            console.log( " i am running now. " )
+        }
+        var obj = {
+            name : "zyx",
+            sex : "boy",
+            say: function (){
+                consle.log( "hello" + this.name + "!" );
+            },
+            run : run
+        }
+        obj.constructor.age = 18;
+
+        // 浅拷贝
+        var person = { ...obj }
+        console.log( person )
+        person.run();
+
+        // 深拷贝
+            // 方法一
+        function deepClone(obj) {
+            return JSON.parse( JSON.stringify( obj ) );
+        }
+
+
+    </script>
+</body>
+</html>
