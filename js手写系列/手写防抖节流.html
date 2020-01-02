@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button id="btn"> click me! </button>
+    <script>
+        //防抖
+        function preventShake( element , time ){
+            var timer;
+            var flag = true;
+            element.addEventListener("click",function(){
+                if(  flag == false ){
+                    clearTimeout( timer );
+                }
+                flag = false;
+                timer = setTimeout(function () {
+                    flag = true;
+                    console.log( "执行成功" );
+                },time);
+            })
+        }
+        preventShake( document.getElementById("btn") , 2000 );
+
+        //节流
+        function reduceExpenditure( element , time ){
+            var flag = true;
+            element.addEventListener("click",function(){
+                if(  flag == true ){
+                    flag = false;
+                    console.log( "执行成功2" );
+                    setTimeout(function () {
+                        flag = true;
+                    },time);
+                }
+            })
+        }
+        reduceExpenditure( document.getElementById("btn") , 2000 );
+
+
+    </script>
+</body>
+</html>
