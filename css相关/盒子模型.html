@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box,.ieBox{
+            width: 100px;
+            height: 100px;
+            margin: 50px;
+            border: 20px solid coral;
+            padding: 20px;
+        }
+        .box{
+            box-sizing: content-box;
+        }
+        .ieBox{
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!--  标准盒子模型   总长 =  width + padding + border + margin   ( 其中 content = width )  -->
+    <div class="box"></div>
+    <br>
+    <!--  IE盒子模型     总长 =  width + margin   ( 其中 width = content + padding + border )  -->
+    <div class="ieBox"></div>
+</body>
+</html>
