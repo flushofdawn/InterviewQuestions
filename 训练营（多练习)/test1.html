@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        //  实现 一个 new
+        const _new = function(){
+            var obj = {}
+            obj.__proto__ = arguments[0].prototype;
+            var res = arguments[0].apply( obj , [...arguments].slice(1) );
+            return typeof res == "object" ? res : obj;
+        }
+
+        function Bar(name) {
+            this.age = name;
+            this.bark = function(){
+                console.log( "hello world!" );
+            }
+        }
+        let d =  _new( Bar , 3 );
+        let e =  new Bar( 10 );
+
+
+        //实现一个call
+        Function.prototype.newCall = function(){
+            var cont = typeof arguments[0] != undefined ? arguments[0] : window;
+            cont.fn = this;
+
+            var arg = [...arguments].slice(1);
+            console.log( arg )
+            var result = cont.fn( ...arg );
+            delete cont.fn;
+            return result;
+        }
+
+
+
+        Function.prototype.newApply = function(){
+            let cont = arguments[0] == undefined ? window : arguments[0];
+            cont.fn = this;
+            var arg = arguments[1];
+            console.log( arg )
+            var result = cont.fn( ...arg )
+            delete cont.fn;
+            return result;
+        }
+
+
+
+
+
+
+
+
+
+        var foo2 = {
+            value:18
+        }
+        function say(name,age){
+            console.log( name );
+            console.log( age );
+            console.log( this.value );
+        }
+
+        say.newCall( foo2 , [ "name1", "age1" ] );
+
+
+
+
+
+
+    </script>
+</body>
+</html>

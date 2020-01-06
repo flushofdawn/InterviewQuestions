@@ -40,6 +40,7 @@
             delete arguments[0].fn;
             return result;
         }*/
+
         Function.prototype.newApply = function ( content ){
             content  =    ( content != undefined ? content : window )
             content.fn = this
@@ -69,20 +70,12 @@
             delete  obj.fn;
             return result;
         }
+        say.newCall( foo2 , "name1", "age1" )
 
         /*say.mycall( foo2 , "name1", "age1" );
         say.newCall( foo2 , "name1", "age1" );
         say.newApply( foo2 , ["name2", "age2" ] );
         say.myApply( foo2 , ["name2", "age2" ] );*/
-        Function.prototype.newCall=function( content ){
-            var cont = content == undefined ? window : content;
-            con.fn = this;
-            var arg = [...arguments].slice(1);
-
-            var result = ;
-
-
-        }
 
 
 
