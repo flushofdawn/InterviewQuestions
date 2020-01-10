@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .myDiv{
+            display: inline-block;
+            background: salmon;
+            padding: 20px;
+        }
+        .myul{
+            width: 200px;
+            background: sandybrown;
+            padding: 20px;
+            list-style:none;
+        }
+        .myli{
+            height: 50px;
+            margin-top: 8px;
+            list-style:none;
+            background: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="myDiv" id="myDiv">
+
+        <ul class="myul" id="myul">
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+        </ul>
+    </div>
+    <script>
+        /*
+            事件捕获（event capturing）：
+                当鼠标点击或者触发dom事件时（被触发dom事件的这个元素被叫作事件源），浏览器会从根节点 ---> 事件源（由外到内）进行事件传播。
+
+            事件冒泡（dubbed bubbling）：
+                事件源 ---> 根节点（由内到外）进行事件传播。
+
+            事件委托：
+                一般来讲，会把一个或者一组元素的事件委托到它的父层或者更外层元素上，真正绑定事件的是外层元素，
+                当事件响应到需要绑定的元素上时（事件捕获），会通过事件冒泡机制从而触发它的外层元素的绑定事件上，然后在外层元素上去执行函数。
+                ( 关键是代码是获取 function中event.target 指向最上层元素 )
+        */
+        /*
+            //事件捕获
+            document.getElementById("myDiv").addEventListener("click",function(){
+                console.log( "myDiv" );
+            },false) //false <-  事件捕获
+            document.getElementById("myul").addEventListener("click",function(){
+                console.log( "myul" );
+            },false)
+            var myli = document.getElementsByClassName("myli");
+            [...myli].map(function( item ){
+                item.addEventListener("click",function(){
+                    console.log( "myli" );
+                },false)
+            })
+
+            //事件冒泡
+            document.getElementById("myDiv").addEventListener("click",function(){
+                console.log( "myDiv" );
+            },true) //false <-  事件冒泡
+            document.getElementById("myul").addEventListener("click",function(){
+                console.log( "myul" );
+            },true)
+            var myli = document.getElementsByClassName("myli");
+            [...myli].map(function( item ){
+                item.addEventListener("click",function(){
+                    console.log( "myli" );
+                },true)
+            })
+
+        */
+
+
+
+
+    </script>
+</body>
+</html>

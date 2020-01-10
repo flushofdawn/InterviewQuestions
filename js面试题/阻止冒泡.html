@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .myDiv{
+            display: inline-block;
+            background: salmon;
+            padding: 20px;
+        }
+        .myul{
+            width: 200px;
+            background: sandybrown;
+            padding: 20px;
+            list-style:none;
+        }
+        .myli{
+            height: 50px;
+            margin-top: 8px;
+            list-style:none;
+            background: bisque;
+        }
+    </style>
+</head>
+<body>
+    <div class="myDiv" id="myDiv">
+        <ul class="myul" id="myul">
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+            <li class="myli"></li>
+        </ul>
+    </div>
+    <script>
+        document.getElementById("myDiv").addEventListener("click",function(){
+            console.log( "myDiv" );
+        },false);
+        document.getElementById("myul").addEventListener("click",function(){
+            console.log( "myul" );
+        },false);
+        var myli = document.getElementsByClassName("myli");
+        [...myli].map(function( item ){
+            item.addEventListener("click",function(event){
+                console.log( "myli" );
+                stopPropagation(event);  //阻止冒泡
+            },false)
+        });
+
+        //阻止冒泡
+        function stopPropagation(e) {
+            e = e || window.event;
+            if(e.stopPropagation) { //W3C阻止冒泡方法
+                e.stopPropagation();
+            } else {
+                e.cancelBubble = true; //IE阻止冒泡方法
+            }
+        }
+    </script>
+</body>
+</html>
