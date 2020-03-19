@@ -19,6 +19,8 @@
 
             4、constructor属性的含义就是指向这个对象的构造函数，所有函数（此时看成对象）最终的构造函数都指向  Function（）
         */
+        //手写 -- 继承
+            //先写一个父类
         function Person(name , age){
             /*console.log( name + " - " + age );      -->    */
             this.name = "zyx";
@@ -27,56 +29,62 @@
                 console.log( "run " + this.name)
             }
         }
-        Person.getInfo=function(){
-            console.log( "getInfo " + this.name)
-        }
         Person.prototype.sex="男";
         Person.prototype.work = function(){
             console.log( "work " + this.name  )
         }
-        console.log( Person.prototype )
+
         /*
-            // 原型链继承
-            function Man(){
+        // 原型链继承
+        function Man(){
 
-            }
-            Man.prototype =new Person();
-            var zyx =new Man();
-            zyx.run();        // run zyx
-            zyx.work();       // work zyx
-            zyx.getInfo();    // zyx.getInfo is not a function
+        }
+        Man.prototype =new Person();
+        var zyx =new Man();
+        zyx.run();        // run zyx
+        zyx.work();       // work zyx
 
-            //  构造函数继承
-            function Man(name,age) {
-                Person.call(this,name,age)
-            }
-            var zyx =new Man();
-            zyx.run();           //run zyx
-            zyx.work();          //zyx.work is not a function
-            zyx.getInfo();       //zyx.getInfo is not a function
+        //  构造函数继承
+        function Man(name,age) {
+            Person.call(this,name,age)
+        }
+        var zyx =new Man();
+        zyx.run();           //run zyx
+        zyx.work();          //zyx.work is not a functionb
 
-            //组合继承
-            function Man(name,age){
-                Person.call(this,"1","2")
-            }
-            Man.prototype = new Person();
-            var zyx =new Man();
-            zyx.run();               //run zyx
-            zyx.work();              //work zyx
-            zyx.getInfo();           //zyx.getInfo is not a function
-        */
-        //寄生组合式继承
+        //组合继承
         function Man(name,age){
             Person.call(this,"1","2")
         }
-        function F(){}
-        F.prototype = Person.prototype;
-        Man.prototype = new F();
+        Man.prototype = new Person();
         Man.prototype.constructor = Man;
+
         var zyx =new Man();
-        console.log( Man.prototype )
+        zyx.run();               //run zyx
+        zyx.work();              //work zyx
+        */
+        //寄生组合式继承
+        /* function object( objPro ){
+        function F(){}
+        F.prototype = objPro;
+        return new F();
+        }
+        function inheritPrototype( sub, sup ){
+        var pro = object( sup.prototype );
+        pro.constructor = sub;
+        sub.prototype = pro;
+        }
+        function Man( name ){
+        Person.call( this,name );
+        }
 
+        inheritPrototype( Man, Person );
+        var zyx =new Man( "zyx" );
+        console.log( zyx );
+        zyx.say();
+        zyx.eat();
 
+        */
     </script>
 </body>
 </html>
