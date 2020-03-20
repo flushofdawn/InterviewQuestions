@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var lengthOfLongestSubstring = function(s) {
+            var arr = s.split("");
+            var maxLen = 0;
+            var childArr = [];
+            for( var i=0;i<arr.length;i++ ){
+                if( childArr.indexOf( arr[i] ) == -1 ){
+                    childArr.push( arr[i] );
+                }else{
+                    if( childArr.length > maxLen ){
+                        maxLen = childArr.length;
+                    }
+                    childArr.splice(  0 , childArr.indexOf( arr[i] ) + 1 );
+                    childArr.push( arr[i] );
+                }
+            }
+            if( childArr.length > maxLen ){
+                maxLen = childArr.length;
+            }
+            return maxLen;
+        };
+    </script>
+</body>
+</html>

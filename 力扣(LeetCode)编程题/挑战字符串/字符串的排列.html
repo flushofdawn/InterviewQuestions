@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var checkInclusion = function(s1, s2) {
+            var s1Arr = [];
+            function index( str ){
+                if( str.length <= 1 ){
+                    return [str]
+                }else{
+                    var res = [];
+                    var nextIndex = index( str.slice(1) );
+                    for(var i=0;i<nextIndex.length;i++){
+                        for(var j=0;j<nextIndex[i].length;j++){
+                            res.push( nextIndex[i].slice(0, j) + str[0] + nextIndex[i].slice(j)  );
+                        }
+                    }
+
+                }
+            }
+        };
+        checkInclusion(  )
+    </script>
+</body>
+</html>
