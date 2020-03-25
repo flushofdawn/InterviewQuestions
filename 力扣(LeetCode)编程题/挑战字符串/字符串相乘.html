@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /*
+         题目：
+
+         给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。
+
+             示例 1:
+                 输入: num1 = "2", num2 = "3"
+                 输出: "6"
+
+             示例 2:
+                 输入: num1 = "123", num2 = "456"
+                 输出: "56088"
+
+         说明：
+
+             1、num1 和 num2 的长度小于110。
+             2、num1 和 num2 只包含数字 0-9。
+             3、num1 和 num2 均不以零开头，除非是数字 0 本身。
+             4、不能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。
+
+        */
+        var multiply = function(num1, num2) {
+            if( num1 == "0" || num2 == "0" ){
+                return "0"
+            }
+            var arr = new Array(10).fill(0);
+            for( var i=0,len = arr.length;i<len;i++ ){
+                arr[i] = ""+i;
+            }
+            var arrNum = [];
+            for( var i=0;i<num1.length;i++ ){
+                var addNum = [];
+                var add = 0;
+                for( var j=0;j<num2.length+1;j++ ){
+                    addNum[ i+j ] = addNum[ i+j ] ? addNum[ i+j ] : 0;
+                    var sum = arr.indexOf( num1[num1.length - i -1] ) * arr.indexOf( (num2[num2.length - j -1])?(num2[num2.length - j -1]):"0"  ) + add;
+                    var num = sum%10;
+                    add = Math.floor( sum/10 );
+                    addNum[ i+j ] = num;
+                }
+                var add2 = 0;
+                for( var k=0;k<addNum.length+1;k++ ){
+
+                    arrNum[k] = arrNum[k]?arrNum[k]:0;
+
+                    var temp = arrNum[k] + (addNum[k]?addNum[k]:0) + add2;
+
+                    arrNum[k] =  temp%10;
+                    add2 = Math.floor( temp/10 );
+                }
+            }
+            var newArr = [];
+
+            for( var i = arrNum.length;i>0;i-- ){
+                if( arrNum[i-1] != 0 ){
+                    newArr = arrNum.slice( 0, i );
+                    break;
+                }
+            }
+            newArr = newArr.reverse();
+            newArr = newArr.join("");
+            return newArr;
+        };
+        console.log( multiply( "123","456" ) );
+    </script>
+</body>
+</html>

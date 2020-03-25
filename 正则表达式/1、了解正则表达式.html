@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var  str = "He is boy. This is dog. Where is she?";
+        /*
+        *   在JavaScript中通过内置对象 RegExp 支持正则表达式
+        *   有两种方式 实例化RegExp对象
+        *       -> 1. 字面量
+        */
+        var reg = /\bis\b/;
+        console.log( str.replace( reg, "IS") );
+        //  He IS boy. This is dog. Where is she?
+
+        //  /g 表示全局 匹配
+        var reg = /\bis\b/g;
+        console.log( str.replace( reg, "IS") );
+        //He IS boy. This IS dog. Where IS she?
+
+        /*
+            *   -> 2. 构造函数
+        */
+        var reg = new RegExp( "\\bis\\b" , "g" );
+        console.log( str.replace( reg , "IS" ) )
+        //He IS boy. This IS dog. Where IS she?
+
+        /*
+            修饰符
+            g : global  全文搜索，若不添加，搜索到第一个匹配停止。
+            i : ignore care 忽略大小写，默认是大小写敏感。
+            m : multiple lines 多行搜索。
+        */
+        var str2 = "He is boy. IS he?"
+        var reg = /\bis\b/gi;
+        console.log( str2.replace( reg , "zz" ) );
+
+
+    </script>
+</body>
+</html>

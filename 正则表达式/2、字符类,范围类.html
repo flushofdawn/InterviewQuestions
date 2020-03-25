@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /*
+            字符类
+
+            我们可以用 元字符  []  来构建一个简单的类
+            所谓类 是指 符合某些特征的 对象 ，一个泛指，而不是特指某个字符
+        */
+        var str = "a1b2c3d4";
+        console.log(  str.replace( /[abc]/g , "X" ) );
+            // X1X2X3d4
+
+        // 反向类  ——> 使用元字符 ^ 创建反向类/负向类
+            // 反向类的 意思是不属于某类的 内容
+        console.log(  str.replace( /[^abc]/g , "X" ) );
+            // aXbXcXXX
+
+        /*
+            范围类  匹配 a-z ：[a-z]
+        */
+        console.log(  str.replace( /[a-z]/g , "X" ) );
+            // X1X2X3X4
+        console.log(  str.replace( /[0-9]/g , "X" ) );
+            // aXbXcXdX
+
+
+
+
+    </script>
+</body>
+</html>

@@ -6,24 +6,108 @@
 </head>
 <body>
     <script>
+        /*
+         题目：
+
+             给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+             换句话说，第一个字符串的排列之一是第二个字符串的子串。
+
+             示例1:
+             输入: s1 = "ab" s2 = "eidbaooo"
+             输出: True
+             解释: s2 包含 s1 的排列之一 ("ba").
+
+             示例2:
+
+             输入: s1= "ab" s2 = "eidboaoo"
+             输出: False
+
+        */
+
+        // 采用 滑动窗口的方法 解题
         var checkInclusion = function(s1, s2) {
-            var s1Arr = [];
+            if( s1.length > s2.length ){
+                return false;
+            }
+            var s1Obj = {}
+            s1.split("").map(function(val,ind){
+                if( s1Obj[val] == undefined ){
+                    s1Obj[val] = 1;
+                }else{
+                    s1Obj[val] ++;
+                }
+            });
+            var s2Arr = [];
+            for( var i = s1.length ,j=0; i<=s2.length;i++,j++ ){
+                let s2Obj = {};
+                s2.slice(j,i).split("").map(function(val,ind){
+                    if( s2Obj[val] == undefined ){
+                        s2Obj[val] = 1;
+                    }else{
+                        s2Obj[val] ++;
+                    }
+                });
+                s2Arr.push( s2Obj );
+            }
+            var s1TagName = Object.getOwnPropertyNames( s1Obj );
+
+            var isSame = false;
+            s2Arr.map(function( s2Obj,ind){
+                console.log( s2Obj );
+                var s2TagName = Object.getOwnPropertyNames( s2Obj );
+                if( s1TagName.length != s2TagName.length ){
+                    flag = false;
+                    return;
+                }
+                var flag = true;
+                s2TagName.map(function(val){
+                    console.log(  s1Obj[val] + " - " + s2Obj[val] )
+                    if( s1Obj[val] != s2Obj[val] ){
+                        flag = false;
+                    }
+                })
+                if( flag == true ){
+                    isSame = true;
+                    return;
+                }
+            })
+            return isSame;
+        };
+
+
+
+       /*
+       // 排列出 s1 的所有序列，结果 数组过大 超出 内存限制 。 ！！！封印此方法
+       var checkInclusion = function(s1, s2) {
+            if( s1.length > s2.length ){
+                return false;
+            }
+            var arr = index( s1 );
+            var flag = false;
+            arr.map(function(val,ind){
+                if( s2.indexOf( val ) != -1 ){
+                    flag = true;
+                    return;
+                }
+            })
+            return flag;
+
             function index( str ){
+                let s1Arr = [];
                 if( str.length <= 1 ){
                     return [str]
                 }else{
-                    var res = [];
                     var nextIndex = index( str.slice(1) );
                     for(var i=0;i<nextIndex.length;i++){
-                        for(var j=0;j<nextIndex[i].length;j++){
-                            res.push( nextIndex[i].slice(0, j) + str[0] + nextIndex[i].slice(j)  );
+                        for(var j=0;j<nextIndex[i].length+1;j++){
+                            console.log( nextIndex[i].slice(0, j) + " - "+ str[0] +" - " +nextIndex[i].slice(j)  )
+                            s1Arr.push( nextIndex[i].slice(0, j) + str[0] + nextIndex[i].slice(j)  );
                         }
                     }
-
+                    return s1Arr;
                 }
             }
-        };
-        checkInclusion(  )
+        };*/
     </script>
 </body>
 </html>
