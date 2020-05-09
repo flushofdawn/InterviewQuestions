@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        /*
+            预定义类
+
+              |      字符     |       等价类            |                含义                   |
+              |       .      |     [^\r\n]             |     除了回车符和 换行符之外的所有符号    |
+              |      \d      |     [0-9]               |     数字字符                          |
+              |      \D      |     [^0-9]              |     非数字字符                        |
+              |      \s      |     [\t\n\x0B\f\r]      |     空白符                            |
+              |      \S      |     [^\t\n\x0B\f\r]     |     非空白符                          |
+              |      \w      |     [a-zA-Z_0-9]        |     单词字符(字母、数字下划线)          |
+              |      \W      |     [^a-zA-Z_0-9]       |     非单词字符(非字母、数字下划线)       |
+        */
+        //匹配一个  ab + 数字 + 任意字符 的 字符串
+        var str = "ab1sabs111";
+        var reg =  /ab\d./g;
+        console.log( str.replace(reg , "X") );      //  Xabs111
+
+        /*
+            边界
+            |      字符      |            含义                  |
+            |       ^       |          以xxx开始                |
+            |       $       |          以xxx结束                |
+            |      \b       |          单词边界                 |
+            |      \B       |          非单词边界               |
+        */
+        var str = "This is a boy!";
+        var reg1 = /\bis\b/g;
+        var reg2 = /\Bis\b/g;
+        console.log( str.replace(reg1 , "X") );   // This X a boy!
+        console.log( str.replace(reg2 , "X") );   // ThX is a boy!
+
+        var str = "@123@456@";
+        var reg3 = /^@\d/g;
+        var reg4 = /(\d@)$/g;
+        console.log( str.replace(reg3 , "X") );   // X23@456@
+        console.log( str.replace(reg4 , "X") );   // @123@45X
+
+        var  str = "@123" + "\n"+ "@456" +'\n'+ "@789";
+        var reg5 = /^@\d/gm;
+        console.log( str.replace(reg5 , "X") );
+        /*
+         X23
+         X56
+         X89
+        */
+
+    </script>
+</body>
+</html>

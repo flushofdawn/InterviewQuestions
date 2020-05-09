@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var p1 = {
+            name:"艾瑞利亚",
+            say:function(a,b,c){
+                console.log( this.name+ ": 我们的脚下，是先烈们的尸骨，不要让他们失望！"+ " - " + a + " - " + b + " - " + c   );
+            }
+        }
+
+        var p2 = {
+            name:"阿狸",
+            say:function(){
+                console.log( this.name+ ": 我们去找点儿真正的乐子吧！" );
+            }
+        }
+
+        Function.prototype.newCall = function( content ){
+            content = ( content ? content: window );
+            content.fn = this;
+            var arg = [...arguments].slice(1);
+            var res = content.fn( ...arg );
+            delete content.fn;
+            return res;
+        }
+
+        Function.prototype.newApply = function( content ){
+            content = ( content ? content: window );
+            content.fn = this;
+            var res;
+            if( arguments[1] ){
+                res = content.fn( ...arguments[1] );
+            }else {
+                res = content.fn( );
+            }
+            delete content.fn;
+            return res;
+        }
+
+        p1.say.newCall( p2 , 'a1' , 'b2' , 'c3' );
+        p1.say.newApply( p2 , ['a1' , 'b2' , 'c3'] );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
