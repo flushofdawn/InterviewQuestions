@@ -20,29 +20,65 @@
           [-1, -1, 2]
         ]
       */
-
       var threeSum = function (nums) {
+        let numArr = []
+        if (nums.length < 3) return numArr
+        nums.sort(function (a, b) {
+          return a - b
+        })
+        for (var i = 0; i < nums.length - 2; i++) {
+          if (nums[0] > 0) {
+            break
+          }
+          if (i > 0 && nums[i] == nums[i - 1]) continue
+          let left = i + 1
+          let right = nums.length - 1
+          while (left < right) {
+            let sum = nums[left] + nums[right] + nums[i]
+            if (sum == 0) {
+              numArr.push([nums[left], nums[right], nums[i]])
+              while (left < right && nums[left] == nums[left + 1]) left++
+              while (left < right && nums[right] == nums[right - 1]) right--
+              left++
+              right--
+            } else if (sum < 0) left++
+            else if (sum > 0) right--
+          }
+        }
+        return numArr
+      }
+      /*
+        // 超时
+        var threeSum = function (nums) {
         let numArr = []
         for (var i = 0; i < nums.length - 2; i++) {
           var arr = []
-          let nums1 = [...nums.slice(i + 1, nums.length)]
-          arr[0] = nums[i]
+          let nums1 = nums.slice(i, nums.length)
+          arr[0] = nums1[0]
           for (var j = 0; j < nums1.length - 1; j++) {
-            let nums2 = [...nums.slice(i + j + 2, nums1.length)]
-            console.log(nums2)
-            arr[1] = nums2[j]
+            let nums2 = nums.slice(i + j + 1, nums.length)
+            arr[1] = nums2[0]
             for (var k = 0; k < nums2.length - 1; k++) {
-              let nums3 = [...nums.slice(i + j + k + 3, nums2.length)]
-              arr[2] = nums3[k]
+              let nums3 = nums.slice(i + j + k + 2, nums.length)
+              arr[2] = nums3[0]
               if (arr[0] + arr[1] + arr[2] == 0) {
-                numArr.push(arr)
+                let arr2 = [...arr].sort().join(',')
+                numArr.push(arr2)
               }
             }
           }
         }
-        console.log(numArr)
-      }
-      threeSum([-1, 0, 1, 2, -1, -4])
+        numArr = [...new Set(numArr)]
+        return (numArr = numArr.map(function (t) {
+          t = t.split(',').map(function (it) {
+            console.log(it)
+            return Number(it)
+          })
+          console.log(t)
+          return t
+        }))
+      } */
+      console.log(threeSum([-1, 0, 1, 2, -1, -4]))
     </script>
   </body>
 </html>
