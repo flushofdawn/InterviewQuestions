@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Title</title>
+	</head>
+	<body>
+		<script>
+			// 标签函数
+			function getPersonInfo(one, two, three) {
+				console.log(one)
+				console.log(two)
+				console.log(three)
+			}
+
+			const person = 'Lydia'
+			const age = 21
+
+			getPersonInfo`${person} is ${age} years old`
+
+			// ++i  和  i++ 的区别
+			let number = 0
+			console.log(number++)
+			console.log(++number)
+			console.log(number)
+
+			// 对象
+			function checkAge(data) {
+				if (data === { age: 18 }) {
+					console.log('You are an adult!')
+				} else if (data == { age: 18 }) {
+					console.log('You are still an adult.')
+				} else {
+					console.log(`Hmm.. You don't have an age I guess`)
+				}
+			}
+
+			checkAge({ age: 18 })
+
+			function Person(firstName, lastName) {
+				this.firstName = firstName
+				this.lastName = lastName
+			}
+
+			const member = new Person('Lydia', 'Hallie')
+			Person.getFullName = function () {
+				return `${this.firstName} ${this.lastName}`
+			}
+
+			console.log(member.getFullName())
+		</script>
+	</body>
+</html>

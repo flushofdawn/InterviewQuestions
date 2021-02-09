@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Title</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        var person = function(name){
-            this.name = name
-            say = function (){
-                console.log( "hello world!" );
-            }
-        }
-        person.prototype.say = function(){
-            console.log( "play LOL!" );
-        }
-        var zz = new person("zz");
-        zz.say()
-
+     let nodeList = [
+      {id: '1-1', children: [{id: '1-2-1'}, {id: '1-2-2'}]},
+      {id: '2-1'},
+      {id: '3-1', children: [{id: '3-2-1', children: [{id: '3-3-1'}]}]}
+    ]
+    function* gen (nodes = []) {
+      for (let item of nodes) {
+          yield item.id
+          if (item.children && item.children.length) yield* gen(item.children)
+      }
+    }
+    console.log(  gen (nodeList) )
     </script>
-</body>
+  </body>
 </html>

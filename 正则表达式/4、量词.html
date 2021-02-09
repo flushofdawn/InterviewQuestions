@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <script>
-        /*
+	<head>
+		<meta charset="UTF-8" />
+		<title>Title</title>
+	</head>
+	<body>
+		<script>
+			/*
             量词
-            |   字符   |               含义                     |
-            |    ?    |       出现零次或一次（最多出现一次）       |
-            |    +    |       出现一次或多次（至少出现一次）       |
+            |   字符   |               含义                      |
+            |    ?    |       出现零次或一次（最多出现一次）      |
+            |    +    |       出现一次或多次（至少出现一次）      |
             |    *    |       出现零次或多次（任意次）            |
-            |  {n}    |       出现n次                           |
-            |  {n,m}  |       出现n次到m次                      |
+            |  {n}    |       出现n次                            |
+            |  {n,m}  |       出现n次到m次                       |
             |  {n,}   |       至少出现n次
         */
 
-        // 贪婪模式 : 正则表达式在处理的时候 会尽可能多的匹配 ，直到匹配失败
-        // 非贪婪模式 : 让正则表达式尽可能少的匹配，也就是说 一旦成功 就不再继续尝试了。  在量词 后 加上?表示 非贪婪模式
+			// 贪婪模式 : 正则表达式在处理的时候 会尽可能多的匹配 ，直到匹配失败
+			// 非贪婪模式 : 让正则表达式尽可能少的匹配，也就是说 一旦成功 就不再继续尝试了。  在量词 后 加上?表示 非贪婪模式
 
-        var str = 'acaccccbcccdddccd';
-        var reg1 = /\w{4,8}/g;
-        var reg2 = /\w{4,8}?/g;
-        console.log( str.replace(reg1 , "X") );      // XXd
-        console.log( str.replace(reg2 , "X") );      // XXXXd
-
-
-
-    </script>
-</body>
+			var str = 'acaccccbcccdddccd'
+			var reg1 = /\w{4,8}/g
+			var reg2 = /\w{4,8}?/g
+			console.log(str.replace(reg1, 'X')) // XXd
+			console.log(str.replace(reg2, 'X')) // XXXXd
+		</script>
+	</body>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>输入一个链表，按链表从尾到头的顺序返回一个ArrayList。</title>
+	</head>
+	<body>
+		<script>
+			/*
+					两个栈实现一个队列。队列的声明如下，请实现它的两个函数 appendTail 和 deleteHead ，
+					分别完成在队列尾部插入整数和在队列头部删除整数的功能。(若队列中没有元素，deleteHead 操作返回 -1 )
+
+					示例 1：
+							输入：
+							["CQueue","appendTail","deleteHead","deleteHead"]
+							[[],[3],[],[]]
+
+							输出：[null,null,3,-1]
+
+					示例 2：
+							输入：
+							["CQueue","deleteHead","appendTail","appendTail","deleteHead","deleteHead"]
+							[[],[],[5],[2],[],[]]
+
+							输出：[null,-1,null,null,5,2]
+
+					提示：
+							1 <= values <= 10000
+							最多会对 appendTail、deleteHead 进行 10000 次调用
+
+			*/
+
+			var CQueue = function () {
+				this.s1 = []
+				this.s2 = []
+			}
+
+			/**
+			 * @param {number} value
+			 * @return {void}
+			 */
+			CQueue.prototype.appendTail = function (value) {
+				this.s1.push(value)
+				return null
+			}
+
+			/**
+			 * @return {number}
+			 */
+			CQueue.prototype.deleteHead = function () {
+				if (this.s2.length == 0) {
+					if (this.s1.length == 0) {
+						return -1
+					} else {
+						this.s2 = this.s1.reverse()
+						this.s1 = []
+						return this.s2.pop()
+					}
+				} else {
+					return this.s2.pop()
+				}
+			}
+			var obj = new CQueue()
+			console.log(obj.deleteHead())
+			console.log(obj.appendTail(5))
+			console.log(obj.appendTail(2))
+			console.log(obj.deleteHead())
+			console.log(obj.deleteHead())
+			/**
+			 * Your CQueue object will be instantiated and called as such:
+			 * var obj = new CQueue()
+			 * obj.appendTail(value)
+			 * var param_2 = obj.deleteHead()
+			 */
+		</script>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>输入一个链表，按链表从尾到头的顺序返回一个ArrayList。</title>
+	</head>
+	<body>
+		<script>
+			/*
+				输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+
+
+			 */
+			/**
+			 * Definition for singly-linked list.
+			 * function ListNode(val) {
+			 *     this.val = val;
+			 *     this.next = null;
+			 * }
+			 */
+			/**
+			 * @param {ListNode} head
+			 * @return {number[]}
+			 */
+			function ListNode(val) {
+				this.val = val
+				this.next = null
+			}
+			var reversePrint = function (head) {
+				if (head == null) return []
+				const res = []
+				while (head) {
+					res.push(head.val)
+					head = head.next
+				}
+				return res.reverse()
+			}
+		</script>
+	</body>
+</html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>var、let和const的区别</title>
-</head>
-<body>
-    <script>
-        /*  概念
+	<head>
+		<meta charset="UTF-8" />
+		<title>var、let和const的区别</title>
+	</head>
+	<body>
+		<script>
+			/*  概念
          var、let和const的区别
             1、var声明的变量会挂载在window上，而let和const声明的变量不会。
             2、var声明变量存在变量提升，let和const不存在变量提升。
@@ -18,67 +18,68 @@
                 (2) 声明后不能再修改
                 (3) 如果声明的是复合类型数据，可以修改其属性
         */
-     // 实操
-        //  1、var声明的变量会挂载在window上，而let和const声明的变量不会。
-        var v1 = "var";
-        let l1 = "let";
-        const c1 = "const";
-        console.log( v1 , window.v1);               //      -->   var var
-        console.log( l1 , window.l1);               //      -->   let undefined
-        console.log( c1 , window.c1);               //      -->   const undefined
 
-        // 2、var声明变量存在变量提升，let和const不存在变量提升。
-        console.log( v2 );               //      -->   undefined
-        var v2 = "var";
+			// 实操
+			//  1、var声明的变量会挂载在window上，而let和const声明的变量不会。
+			var v1 = 'var'
+			let l1 = 'let'
+			const c1 = 'const'
+			console.log(v1, window.v1) //      -->   var var
+			console.log(l1, window.l1) //      -->   let undefined
+			console.log(c1, window.c1) //      -->   const undefined
 
-       /* console.log( l2 );               //      -->   Cannot access 'l2' before initialization
+			// 2、var声明变量存在变量提升，let和const不存在变量提升。
+			console.log(v2) //      -->   undefined
+			var v2 = 'var'
+
+			/* console.log( l2 );               //      -->   Cannot access 'l2' before initialization
         let l2 = "let";
 
         console.log( c2 );               //      -->   Cannot access 'c2' before initialization
         const c2 = "const";*/
 
-        // 3、let和const声明形成块作用域。
-        if(true){
-            var v3 = "var";
-            let l3 = "let";
-            const c3 = "const";
-        }
+			// 3、let和const声明形成块作用域。
+			if (true) {
+				var v3 = 'var'
+				let l3 = 'let'
+				const c3 = 'const'
+			}
 
-        console.log(v3);                // var
-        /* console.log(l3);                // l3 is not defined
+			console.log(v3) // var
+			/* console.log(l3);                // l3 is not defined
            console.log(c3);                // c3 is not defined
         */
-        // 4、同一作用域下let和const不能声明同名变量，而var可以。
-        var v4 = "var4-1";
-        var v4 = "var4-2";
+			// 4、同一作用域下let和const不能声明同名变量，而var可以。
+			var v4 = 'var4-1'
+			var v4 = 'var4-2'
 
-        let l4 = "let4-1";
-       /* let l4 = "let4-2";        //   Error -->  Identifier 'l4' has already been declared*/
+			let l4 = 'let4-1'
+			/* let l4 = "let4-2";        //   Error -->  Identifier 'l4' has already been declared*/
 
-        const c4 = "const4-1";
-       /* const c4 = "const4-2";        //   Error -->  Identifier 'c4' has already been declared*/
+			const c4 = 'const4-1'
+			/* const c4 = "const4-2";        //   Error -->  Identifier 'c4' has already been declared*/
 
-        //  5、let暂存死区。
-        var a = 1;
-        if(1){
-            a = 10;
-            // 在当前块作用域中存在a使用let/const声明的情况下，给a赋值10时，只会在当前作用域找变量a，
-            /*let a = 2;
+			//  5、let暂存死区。
+			var a = 1
+			if (1) {
+				a = 10
+				// 在当前块作用域中存在a使用let/const声明的情况下，给a赋值10时，只会在当前作用域找变量a，
+				/*let a = 2;
                 // 而这时，还未到声明时候，所以控制台  Error:  Cannot access 'a' before initialization
             const a = 3;
                 //  Error:  Cannot access 'a' before initialization*/
-        }
+			}
 
-        // 6、const相关
-            // (1) 一旦声明必须赋值,不能使用null占位。
-            /*const c51;             //  Missing initializer in const declaration*/
-            // (2) 声明后不能再修改
-            /*const c52 = 1;
+			// 6、const相关
+			// (1) 一旦声明必须赋值,不能使用null占位。
+			/*const c51;             //  Missing initializer in const declaration*/
+			// (2) 声明后不能再修改
+			/*const c52 = 1;
             c52 = 2;                // Assignment to constant variable.*/
-            // (3) 如果声明的是复合类型数据，可以修改其属性
-            const c53 = { a:1 };
-            c53.a = 2;
-            console.log( c53 )         //    {a: 2}
-    </script>
-</body>
+			// (3) 如果声明的是复合类型数据，可以修改其属性
+			const c53 = { a: 1 }
+			c53.a = 2
+			console.log(c53) //    {a: 2}
+		</script>
+	</body>
 </html>
