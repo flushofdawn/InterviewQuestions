@@ -1,97 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .fat,.fat1,.fat2,.fat3,.fat4{
-            width: 200px;
-            height: 200px;
-            border: 1px solid black;
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<title>Title</title>
+		<style>
+			.fat,
+			.fat1,
+			.fat2,
+			.fat3,
+			.fat4 {
+				width: 200px;
+				height: 200px;
+				border: 1px solid black;
+			}
 
-        /* - flex布局 - */
-        .fat{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .child{
-            background-color: #DDD;
-        }
+			/* - flex布局 - */
+			.fat {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.child {
+				background-color: #ddd;
+			}
 
-        /* - 绝对定位 + transform - */
-        .fat1{
-            position: relative;
-        }
-        .child1{
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background:  #DDD;
-        }
+			/* - 绝对定位 + transform - */
+			.fat1 {
+				position: relative;
+			}
+			.child1 {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				background: #ddd;
+			}
 
-        /* - 绝对定位  - */
-        .fat2{
-            position: relative;
-        }
-        .child2{
-            width: 50%;
-            height: 50%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            margin: auto;
-            background:  #DDD;
-        }
+			/* - 绝对定位  - */
+			.fat2 {
+				position: relative;
+			}
+			.child2 {
+				width: 50%;
+				height: 50%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				background: #ddd;
+			}
 
-        /* - display:table-cell  - */
-        .fat3{
-            display: table-cell;
-            vertical-align: middle;
-        }
-        .child3{
-            background: #DDD;
-        }
+			/* - display:table-cell  - */
+			.fat3 {
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.child3 {
+				background: #ddd;
+			}
 
-        /* - gird + margin布局  - */
-        .fat4{
-            display: grid;
-        }
-        .child4{
-            background: #DDD;
-            margin: auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="fat">
-        <div class="child">
-            垂直居中--flex布局
-        </div>
-    </div>
-    <div class="fat1">
-        <div class="child1">
-            垂直居中--绝对定位 + transform
-        </div>
-    </div>
-    <div class="fat2">
-        <div class="child2">
-            垂直居中--绝对定位
-        </div>
-    </div>
-    <div class="fat3">
-        <div class="child3">
-            垂直居中-- display:table-cell
-        </div>
-    </div>
-    <div class="fat4">
-        <div class="child4">
-            垂直居中-- gird + margin布局
-        </div>
-    </div>
-</body>
+			/* - gird + margin布局  - */
+			.fat4 {
+				display: grid;
+			}
+			.child4 {
+				background: #ddd;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="fat">
+			<div class="child">垂直居中--flex布局</div>
+		</div>
+		<div class="fat1">
+			<div class="child1">垂直居中--绝对定位 + transform</div>
+		</div>
+		<div class="fat2">
+			<div class="child2">垂直居中--绝对定位</div>
+		</div>
+		<div class="fat3">
+			<div class="child3">垂直居中-- display:table-cell</div>
+		</div>
+		<div class="fat4">
+			<div class="child4">垂直居中-- gird + margin布局</div>
+		</div>
+	</body>
 </html>

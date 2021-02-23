@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Title</title>
+	</head>
+	<body>
+		<script>
+			// js中有哪些内置错误类型 ----- 错误之前的代码会执行，之后代码不会执行（除非设置了  try{}catch(e){} ）
+
+			// 基类 - Error 创建一个错误
+			// new Error([message[, fileName[,lineNumber]]]) //参数均为可选
+			// throw new Error('这是一个错误!')
+
+			// 错误类型1 ：ReferenceError（引用错误）
+			// 定义：表示引用错误，使用了未声明的变量。
+			// console.log(a) // =>   Uncaught ReferenceError: a is not defined
+
+			// 错误类型2 ：RangeError
+			// 定义：数值变量或参数超出其有效范围。
+			// let arr = new Array(-1) // =>  Uncaught RangeError: Invalid array length
+
+			// 错误类型3 ：TypeError
+			// 定义：变量在运行时的访问不是预期类型,或者访问不存在的方法时,尤其是在使用类型特定的操作而变量类型不对时。
+			// let a = 1;  a(); // => Uncaught TypeError: a is not a function
+
+			// 错误类型4 ：SyntaxError
+			// 定义：输入 JS 引擎不能理解的代码时，就会发生这个错误
+			// lett a = 1;   // => Uncaught SyntaxError: Unexpected identifier
+
+			// 错误类型5 ：URIError
+			// 定义：URIError只会在使用encodeURL()或decodeURL()时，传入了格式错误的URL时发生,但非常罕见,因为上面两个函数非常稳健.
+			// decodeURI('%') // =>Uncaught URIError: URI malformed at decodeURI
+
+			// 错误类型6 ：EvalError
+			// 定义：会在使用eval()函数发生异常时抛出。
+			// EvalError 不在当前ECMAScript规范中使用，因此不会被运行时抛出. 但是对象本身仍然与规范的早期版本向后兼容.
+
+			// 错误类型7 ：InternalError
+			// 定义：表示出现在JavaScript引擎内部的错误。   如: "递归太多". 但事实上 只会 抛出RangeError
+		</script>
+	</body>
+</html>
