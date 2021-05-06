@@ -41,19 +41,54 @@
 			 * @param {string} word
 			 * @return {boolean}
 			 */
+			const board = [
+				['A', 'B', 'C', 'E'],
+				['S', 'F', 'E', 'S'],
+				['A', 'D', 'E', 'E']
+			]
+			const ord = 'ABCESEEEFS'
 			var exist = function (board, word) {
-				for (let i = 0; i < board.length; i++) {
-					for (let j = 0; j < board.length; j++) {
-						findWay(i, j, board)
-					}
+				if (word == '') {
+					return false
 				}
-				const findWay = (i, j, board) => {
-					for (let w = 0; j < word.length; j++) {
-						if (board[i][j] == word[i]) {
+				if (word.length > board.length * board[0].length) {
+					return false
+				}
+				const next = (x, y, word, i, copyArr) => {
+					if (
+						x < 0 ||
+						x >= copyArr.length ||
+						y < 0 ||
+						y >= copyArr[0].length ||
+						copyArr[x][y] != word[i]
+					) {
+						return false
+					}
+					let coApyA = JSON.parse(JSON.stringify(copyArr))
+					coApyA[x][y] = null
+					if (i >= word.length - 1) {
+						return true
+					}
+					return (
+						next(x - 1, y, word, i + 1, coApyA) ||
+						next(x + 1, y, word, i + 1, coApyA) ||
+						next(x, y - 1, word, i + 1, coApyA) ||
+						next(x, y + 1, word, i + 1, coApyA)
+					)
+				}
+				for (let i = 0; i < board.length; i++) {
+					for (let j = 0; j < board[i].length; j++) {
+						if (board[i][j] == word[0]) {
+							let copyArr = JSON.parse(JSON.stringify(board))
+							if (next(i, j, word, 0, copyArr)) {
+								return true
+							}
 						}
 					}
 				}
+				return false
 			}
+			console.log(exist(board, ord))
 		</script>
 	</body>
 </html>
